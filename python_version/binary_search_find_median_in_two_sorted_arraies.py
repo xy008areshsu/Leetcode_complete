@@ -5,7 +5,7 @@ There are two sorted arrays A and B of size m and n respectively. Find the media
 
 class Solution:
     # @return a float
-    def findMedianSortedArrays(self, A, B):
+    def findMedianSortedArrays(self, A, B): # more practice
         if (len(A) + len(B)) % 2 == 0:
             return (self.get_kth(A, B, (len(A) + len(B)) / 2) + self.get_kth(A, B, (len(A) + len(B)) / 2 + 1)) / 2.0
 
