@@ -61,10 +61,21 @@ class Solution:
         slow = head
         fast = head.next
         while fast and fast.next:
-            if fast.next.next and fast.next.next.next:
+            if fast.next.next is None or fast.next.next.next is None:  # Careful!!!!
                 prev_mid = slow
 
             slow = slow.next
             fast = fast.next.next
 
         return prev_mid, slow
+
+
+
+if __name__ == '__main__':
+    sol = Solution()
+    head = ListNode(-1)
+    head.next = ListNode(0)
+    head.next.next = ListNode(1)
+    head.next.next.next = ListNode(2)
+
+    print(sol.find_mid(head))
