@@ -2,10 +2,19 @@
 #include <string>
 #include <iostream>
 #include <tuple>
+#include <unordered_map>
 #include <map>
 
 using namespace std;
 
+class pairhash {
+public:
+  template <typename T, typename U>
+  std::size_t operator()(const std::pair<T, U> &x) const
+  {
+    return std::hash<T>()(x.first) ^ std::hash<U>()(x.second);
+  }
+};
 
 class Solution {
 public:
@@ -29,7 +38,9 @@ public:
 
         for (auto idx: head_idx) {
         	string str_aux = word.substr(0, 1);
-        	map<vector<int>, vector<int> > parent { {idx, {}}};
+        	unordered_map<pair<int, int>, vector<int>, pairhash> parent;
+        	pair<int, int> n_idx {idx[0], idx[1]};
+        	parent[n_idx] = {};
         	if (helper(board, word, idx, str_aux, parent))
         		return true;
         }
@@ -37,18 +48,20 @@ public:
         return false;
     }
 
-    bool helper(vector<vector<char> >& board, string word, vector<int>& idx, string& str_aux, map<vector<int>, vector<int> >& parent ) {
+    bool helper(vector<vector<char> >& board, string word, vector<int>& idx, string& str_aux, unordered_map<pair<int, int>, vector<int>, pairhash>& parent ) {
     	if (str_aux == word)
     		return true;
 
     	for (auto neighbor: neighbors(idx, board)) {
-    		if (parent.find(neighbor) == parent.end()) {
+    		pair<int, int> n_idx {neighbor[0], neighbor[1]};
+    		auto f = parent.find(n_idx);
+    		if (parent.find(n_idx) == parent.end()) {
     			if (board[neighbor[0]][neighbor[1]] == word[str_aux.length()]) {
-    				parent[neighbor] = idx;
+    				parent[n_idx] = idx;
     				str_aux += board[neighbor[0]][neighbor[1]];
     				if (helper(board, word, neighbor, str_aux, parent))
     					return true;
-    				parent.erase(neighbor);
+    				parent.erase(n_idx);
     				str_aux = str_aux.substr(0, str_aux.length() - 1);
     			}
     		}
@@ -88,6 +101,14 @@ int main()
 	string word {"ABCB"};
 
 	bool _exist = sol.exist(board, word);
+
+	// unordered_map<pair<int, int>, vector<int> , pairhash> h;
+	// h[make_pair<int, int>(1, 2)] = {3, 4};
+	// pair<int, int> idx {1, 2};
+	// auto val = h.find(idx);
+
+	// if (val != h.end())
+	// 	cout << h[idx][0] << endl;
 
 	cout << _exist << endl;
 
