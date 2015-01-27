@@ -28,4 +28,4 @@ def helper(num, res, list_aux):
                 list_aux.pop()
 
 
-print(factors_of_num(8864))
+print(factors_of_num(6))

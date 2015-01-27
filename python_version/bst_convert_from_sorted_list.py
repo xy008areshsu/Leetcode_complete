@@ -22,7 +22,7 @@ class ListNode:
 class Solution:
     # @param head, a list node
     # @return a tree node
-    def sortedListToBST(self, head):   # More practice!!!
+    def sortedListToBST(self, head):   # More practice!!!  updated version to find prev_mid
         if head is None:
             return None
 
@@ -60,10 +60,13 @@ class Solution:
 
         slow = head
         fast = head.next
+        dummy = ListNode(0)
+        dummy.next = head
+        prev_mid = dummy
         while fast and fast.next:
-            if fast.next.next is None or fast.next.next.next is None:  # Careful!!!!
-                prev_mid = slow
-
+            # if fast.next.next is None or fast.next.next.next is None:  # Careful!!!!
+            #     prev_mid = slow
+            prev_mid = prev_mid.next
             slow = slow.next
             fast = fast.next.next
 
@@ -73,9 +76,8 @@ class Solution:
 
 if __name__ == '__main__':
     sol = Solution()
-    head = ListNode(-1)
-    head.next = ListNode(0)
-    head.next.next = ListNode(1)
-    head.next.next.next = ListNode(2)
+    head = ListNode(3)
+    head.next = ListNode(5)
+    head.next.next = ListNode(8)
 
-    print(sol.find_mid(head))
+    print(sol.sortedListToBST(head).val)
