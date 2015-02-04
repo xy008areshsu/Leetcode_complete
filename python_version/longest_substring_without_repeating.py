@@ -2,6 +2,10 @@
 Given a string, find the length of the longest substring without repeating characters. For example, the longest substring without repeating letters for "abcabcbb" is "abc", which the length is 3. For "bbbbb" the longest substring is "b", with the length of 1.
 """
 
+# use h_map, record each element when scanning, key is the char, value is the index
+# if each time, s[j] not in h_map, add it into h_map
+# else, update result length first, then delete all of the element key in h_map with the index before s[j]
+
 
 class Solution:
     # @return an integer

@@ -5,12 +5,19 @@ Given a string, find the length of the longest substring T that contains at most
 T is "ece" which its length is 3.
 """
 
+#idea : maintain a h_map, keys are each char, and vals are lists of indices of each char, each val is a sorted list, since the index goes from 0 to len(s) - 1
+# scan the string, if the char already in h_map, append the index of that char to the value list.
+# else, if len(h_map) still less than 2, add this char into the h_map
+# else, find the minimum index and remove it from the value list. If any value list is empty, then delete the corresponding key. Repeat this until the length of
+# h_map is less than 2.
+# update the longest length at each step of the for loop
+
 import collections
 
 class Solution:
     # @param s, a string
     # @return an integer
-    def lengthOfLongestSubstringTwoDistinct(self, s):  # More practice,  maintain a h_map, keys are each char, and vals are lists of indices of each char, each val is a sorted list, since the index goes from 0 to len(s) - 1
+    def lengthOfLongestSubstringTwoDistinct(self, s):  # More practice,
         if s is None:
             return 0
         if len(s) == 0 or len(s) == 1 or len(s) == 2:
