@@ -59,7 +59,41 @@ public:
     		helper(root->right, res, str_aux);
     	str_aux = str_aux.substr(0, str_aux.length() - 1);
     }
+
+    int sumNumbers(TreeNode *root) {
+      if (root == nullptr) {
+        return 0;
+      }
+
+      vector<string> res;
+      string str_aux;
+      helper(root, res, str_aux);
+
+      int res_sum = accumulate(begin(res), end(res), 0, [](int partial_res, string s) {return partial_res + stoi(s);});
+
+      return res_sum;
+
+    }
+
+    void helper(TreeNode *root, vector<string>& res, string& str_aux) {
+      if(root->left == nullptr && root->right == nullptr) {
+        res.push_back(str_aux + to_string(root->val));
+        return;
+      }
+
+      if (root->left) {
+        str_aux += to_string(root->val);
+        helper(root->left, res, str_aux);
+        str_aux = str_aux.substr(0, str_aux.length() - 1);
+      }
+      if (root->right) {
+        str_aux += to_string(root->val);
+        helper(root->right, res, str_aux);
+        str_aux = str_aux.substr(0, str_aux.length() - 1);
+      }
+    }
 };
+
 
 
 int main()

@@ -17,6 +17,9 @@ If the first sequence of non-whitespace characters in str is not a valid integra
 If no valid conversion could be performed, a zero value is returned. If the correct value is out of the range of representable values, INT_MAX (2147483647) or INT_MIN (-2147483648) is returned.
 """
 
+# step 1: determine the sign of the number, check str[0] if it is a sign
+# step 2: loop, put each char into a list, until non numerical char is found
+# step 3: calculate the value
 
 
 class Solution:

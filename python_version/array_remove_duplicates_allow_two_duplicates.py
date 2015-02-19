@@ -43,6 +43,7 @@ class Solution:
         return first + 1
 
 
+
 if __name__ == '__main__':
     sol = Solution()
-    print(sol.removeDuplicates([1, 2, 3]))
+    print(sol.removeDuplicates([1, 1, 2, 2, 3, 3, 3]))

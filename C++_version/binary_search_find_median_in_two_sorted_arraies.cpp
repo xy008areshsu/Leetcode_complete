@@ -31,12 +31,14 @@ public:
     			return find_kth(A, m / 2, B, n, k);
     	} else {
     		if (B[n/2] >= A[m/2])
-    			return (A + m/2, m/2, B, n, k - m/2 + 1);
+    			return find_kth(A + m/2, m/2, B, n, k - m/2 + 1);
     		else
-    			return (A, m, B + n/2, n/2, k - n/2  + 1);
+    			return find_kth(A, m, B + n/2, n/2, k - n/2  + 1);
     	}
     }
 };
+
+
 
 int main()
 {
@@ -45,3 +47,4 @@ int main()
 	int B[1] = {3};
 	cout << sol.findMedianSortedArrays(A, 2, B, 1) << endl;
 }
+
